@@ -1,4 +1,6 @@
 import "./App.css";
+import React from "react";
+
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import StreamList from "./components/streams/StreamList";
 import StreamNew from "./components/streams/StreamNew";
