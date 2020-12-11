@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { signIn, signOut } from "../actions";
 
 export default function GoogleAuth() {
-  let auth = "";
-  const [isSignedIn, setIsSignedIn] = useState(false);
-
-  const authChangeHandler = () => {
-    setIsSignedIn(auth.isiSgnedIn.get());
+  const dispatch = useDispatch();
+  const authState = useSelector((state) => state.auth);
+  console.log("AuthState", authState);
+  const authChangeHandler = (isSignedIn) => {
+    if (isSignedIn) {
+      dispatch(signIn(window.auth.currentUser.get().getId()));
+    } else {
+      dispatch(signOut());
+    }
   };
 
   const signInHandler = () => {
-    auth.signIn();
+    window.auth.signIn();
   };
 
   const signOutHandler = () => {
-    auth.signOut();
+    window.auth.signOut();
   };
   const renderText = () => {
-    if (isSignedIn) {
+    if (authState.isSigned) {
       return (
         <button className="ui button red google" onClick={signOutHandler}>
           <i className="google icon"></i>
@@ -38,7 +44,6 @@ export default function GoogleAuth() {
 
   useEffect(function () {
     window.gapi.load("client:auth2", () => {
-      console.log(window.gapi);
       window.gapi.client
         .init({
           clientId:
@@ -46,8 +51,9 @@ export default function GoogleAuth() {
           scope: "email",
         })
         .then(() => {
-          auth = window.gapi.auth2.getAuthInstance();
-          auth.isSignedIn.listen(authChangeHandler);
+          window.auth = window.gapi.auth2.getAuthInstance();
+          authChangeHandler(window.auth.isSignedIn.get());
+          window.auth.isSignedIn.listen(authChangeHandler);
         });
     });
   }, []);

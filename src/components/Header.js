@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import GoogleAuth from "../components/GoogleAuth";
 export default function Header() {
   return (
-    <div className="ui secondary  menu">
+    <div className="ui container secondary  menu">
       <Link to="/" className=" item">
         Streamy
       </Link>
