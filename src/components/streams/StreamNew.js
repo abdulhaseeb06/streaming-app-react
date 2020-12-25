@@ -1,6 +1,12 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Field, reduxForm } from "redux-form";
+import { createStream } from "../../actions";
+
 const StreamNew = (props) => {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
   const renderInput = ({ input, label }) => {
     return (
       <div className="field">
@@ -11,7 +17,7 @@ const StreamNew = (props) => {
   };
 
   const onSubmit = (formValues) => {
-    console.log(formValues);
+    dispatch(createStream(formValues, auth));
   };
 
   return (

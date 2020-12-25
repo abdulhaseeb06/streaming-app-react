@@ -5,7 +5,6 @@ import { signIn, signOut } from "../actions";
 export default function GoogleAuth() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
-  console.log("AuthState", authState);
   const authChangeHandler = (isSignedIn) => {
     if (isSignedIn) {
       dispatch(signIn(window.auth.currentUser.get().getId()));
