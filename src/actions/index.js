@@ -1,4 +1,5 @@
 import baseStreamAPI from "../apis/streams";
+import history from "../history";
 import {
   FETCH_STREAMS,
   FETCH_STREAM,
@@ -31,6 +32,7 @@ export const createStream = (payload, authState) => {
       type: "CREATE_STREAM",
       payload: response.data,
     });
+    history.push("/");
   };
 };
 
@@ -51,9 +53,10 @@ export const fetchStream = (id) => {
 
 export const editStream = (id, formValues) => {
   return async (dispatch) => {
-    const stream = await baseStreamAPI.put(`/streams/${id}`, formValues);
+    const stream = await baseStreamAPI.patch(`/streams/${id}`, formValues);
 
     dispatch({ type: EDIT_STREAM, payload: stream.data });
+    history.push("/");
   };
 };
 
