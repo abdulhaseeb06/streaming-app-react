@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 
 const StreamForm = (props) => {
-  const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
   const renderInput = ({ input, label }) => {
@@ -15,8 +14,7 @@ const StreamForm = (props) => {
     );
   };
 
-  const onSubmit = (formValues) => {
-    console.log(props.onSubmit);
+  const onSubmit = (dispatch) => {
     dispatch(props.onSubmit());
   };
 
