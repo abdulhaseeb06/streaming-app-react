@@ -7,7 +7,7 @@ function StreamList() {
   const streams = useSelector((state) => state.streams);
   const currentUserId = useSelector((state) => state.auth.userId);
   const userSignedIn = useSelector((state) => state.auth.isSigned);
-  console.log(userSignedIn);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -59,7 +59,7 @@ function StreamList() {
             {renderAdmin(item)}
             <i className="large middle aligned icon camera"></i>
             <div className="content">
-              {item.title}
+              <Link to={`/streams/${item.id}`}>{item.title}</Link>
               <div className="description">{item.description}</div>
             </div>
           </div>

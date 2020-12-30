@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
 import Modal from "../Modal";
 import history from "../../history";
 import { deleteStream, fetchStream } from "../../actions";
@@ -14,7 +13,7 @@ export default function StreamDelete(props) {
       <button
         className="ui button negative"
         onClick={() => {
-          deleteStream(props.match.params.id);
+          deleteS(props.match.params.id);
         }}
       >
         Delete
@@ -38,7 +37,7 @@ export default function StreamDelete(props) {
     }
   };
 
-  const deleteStream = (id) => {
+  const deleteS = (id) => {
     dispatch(deleteStream(id));
   };
 
